@@ -16,7 +16,7 @@ void setup() {
 
 void loop() 
 {
-  if (mcp2515.readMessage(&canMsg) == MCP2515::ERROR_OK) // To receive data (Poll Read)
+  if (mcp2515.readMessage(&canMsg) == MCP2515::ERROR_OK) // To receive data
   {
      float ID = canMsg.data[0];
      float Ax = canMsg.data[1];         
