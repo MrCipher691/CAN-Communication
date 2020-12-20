@@ -70,7 +70,7 @@ void setup()
   SPI.begin();               //Begins SPI communication
   
   mcp2515.reset();
-  mcp2515.setBitrate(CAN_500KBPS,MCP_8MHZ); //Sets CAN at speed 500KBPS and Clock 8MHz
+  mcp2515.setBitrate(CAN_10KBPS,MCP_8MHZ); //Sets CAN at speed 500KBPS and Clock 8MHz
   mcp2515.setNormalMode();
 
   Serial.println("Initialize MPU6050");
@@ -99,34 +99,20 @@ void loop()
   Vector normAccel = mpu.readNormalizeAccel();
   Vector rawGyro = mpu.readRawGyro();
   Vector normGyro = mpu.readNormalizeGyro();
-
-  /*Serial.print(" ACCEL. Xraw = ");
-  Serial.print(rawAccel.XAxis);
-  Serial.print(" ACCEL. Yraw = ");
-  Serial.print(rawAccel.YAxis);
-  Serial.print(" ACCEL. Zraw = ");
-  Serial.println(rawAccel.ZAxis);*/
   
-  Serial.print(" ACCEL. Xnorm = ");
+  /*Serial.print(" ACCEL. Xnorm = ");
   Serial.print(normAccel.XAxis);
   Serial.print(" ACCEL. Ynorm = ");
   Serial.print(normAccel.YAxis);
   Serial.print(" ACCEL. Znorm = ");
   Serial.println(normAccel.ZAxis);
-  
-  /*Serial.print(" GYRO. Xraw = ");
-  Serial.print(rawGyro.XAxis);
-  Serial.print(" GYRO. Yraw = ");
-  Serial.print(rawGyro.YAxis);
-  Serial.print(" GYRO. Zraw = ");
-  Serial.println(rawGyro.ZAxis);*/
 
   Serial.print(" GYRO. Xnorm = ");
   Serial.print(normGyro.XAxis);
   Serial.print(" GYRO. Ynorm = ");
   Serial.print(normGyro.YAxis);
   Serial.print(" GYRO. Znorm = ");
-  Serial.println(normGyro.ZAxis);
+  Serial.println(normGyro.ZAxis);*/
 
   int Ax = normAccel.XAxis;
   int Ay = normAccel.YAxis;
@@ -135,17 +121,37 @@ void loop()
   int Gy = normGyro.YAxis;
   int Gz = normGyro.ZAxis;
 
-  canMsg.can_id  = 0x36;           //CAN id as 0x036 
+  canMsg.can_id  = 0x036;           //CAN id as 0x036 
   canMsg.can_dlc = 8;               //CAN data length as 8
   canMsg.data[0] = canMsg.can_id;
-  canMsg.data[1] = Ax;
+  /*canMsg.data[1] = Ax;
   canMsg.data[2] = Ay;
   canMsg.data[3] = Az;
   canMsg.data[4] = Gx;
   canMsg.data[5] = Gy;
-  canMsg.data[6] = Gz;
+  canMsg.data[6] = Gz;*/
+  canMsg.data[1] = "7DF";
+  canMsg.data[2] = "7DF";
+  canMsg.data[3] = "7DF";
+  canMsg.data[4] = "7DF";
+  canMsg.data[5] = "7DF";
+  canMsg.data[6] = "7DF";
   canMsg.data[7] = 0x00;
   mcp2515.sendMessage(&canMsg);     //Sends the CAN message
 
-  delay(10);
+  Serial.print(" AX = ");
+  Serial.print(canMsg.data[1]);
+  Serial.print(" AY = ");
+  Serial.print(canMsg.data[2]);
+  Serial.print(" AZ = ");
+  Serial.print(canMsg.data[3]);
+
+  Serial.print(" GX = ");
+  Serial.print(canMsg.data[4]);
+  Serial.print(" GY = ");
+  Serial.print(canMsg.data[5]);
+  Serial.print(" GZ = ");
+  Serial.println(canMsg.data[6]);
+
+  delay(2000);
 }
