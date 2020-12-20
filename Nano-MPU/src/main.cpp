@@ -70,7 +70,7 @@ void setup()
   SPI.begin();               //Begins SPI communication
   
   mcp2515.reset();
-  mcp2515.setBitrate(CAN_10KBPS,MCP_8MHZ); //Sets CAN at speed 500KBPS and Clock 8MHz
+  mcp2515.setBitrate(CAN_50KBPS,MCP_8MHZ); //Sets CAN at speed 500KBPS and Clock 8MHz
   mcp2515.setNormalMode();
 
   Serial.println("Initialize MPU6050");
