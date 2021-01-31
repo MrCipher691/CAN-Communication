@@ -99,20 +99,6 @@ void loop()
   Vector normAccel = mpu.readNormalizeAccel();
   Vector rawGyro = mpu.readRawGyro();
   Vector normGyro = mpu.readNormalizeGyro();
-  
-  /*Serial.print(" ACCEL. Xnorm = ");
-  Serial.print(normAccel.XAxis);
-  Serial.print(" ACCEL. Ynorm = ");
-  Serial.print(normAccel.YAxis);
-  Serial.print(" ACCEL. Znorm = ");
-  Serial.println(normAccel.ZAxis);
-
-  Serial.print(" GYRO. Xnorm = ");
-  Serial.print(normGyro.XAxis);
-  Serial.print(" GYRO. Ynorm = ");
-  Serial.print(normGyro.YAxis);
-  Serial.print(" GYRO. Znorm = ");
-  Serial.println(normGyro.ZAxis);*/
 
   int Ax = normAccel.XAxis;
   int Ay = normAccel.YAxis;
@@ -146,6 +132,4 @@ void loop()
   Serial.print(canMsg.data[5]);
   Serial.print(" GZ = ");
   Serial.println(canMsg.data[6]);
-
-  delay(2000);
 }

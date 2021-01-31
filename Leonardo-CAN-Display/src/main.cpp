@@ -26,23 +26,19 @@ void loop()
      float Gy = canMsg.data[5];         
      float Gz = canMsg.data[6];
 
-     Serial.print("------MPU 6050------");
-     Serial.print("\n");
      Serial.print(ID);
-     Serial.print("\n");
+     Serial.print("\t");
      Serial.print(Ax);
-     Serial.print("\n");
+     Serial.print("\t");
      Serial.print(Ay);
-     Serial.print("\n");
+     Serial.print("\t");
      Serial.print(Az);
-     Serial.print("\n");
+     Serial.print("\t");
      Serial.print(Gx);
-     Serial.print("\n");
+     Serial.print("\t");
      Serial.print(Gy);
-     Serial.print("\n");
+     Serial.print("\t");
      Serial.print(Gz);
      Serial.print("\n");
-
-     delay(10);
-    }
+  }
 }
